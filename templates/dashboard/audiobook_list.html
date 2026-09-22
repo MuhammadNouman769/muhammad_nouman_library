@@ -1,0 +1,16 @@
+{% extends "dashboard/base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Audio Books" %}{% endblock %}
+{% block dash_content %}
+<h2 class="fw-bold mb-4">{% trans "Audio Books" %}</h2>
+<div class="dash-card">
+  <table class="table dash-table">
+    <thead><tr><th>{% trans "Title" %}</th><th>{% trans "Author" %}</th><th></th></tr></thead>
+    <tbody>
+      {% for book in books %}
+      <tr><td>{{ book.title }}</td><td>{{ book.author.name }}</td><td><a href="{% url 'dashboard:book_edit' book.pk %}" class="btn btn-sm btn-outline-primary">{% trans "Edit" %}</a></td></tr>
+      {% empty %}<tr><td colspan="3" class="text-center text-muted py-4">{% trans "No audio books yet." %}</td></tr>{% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

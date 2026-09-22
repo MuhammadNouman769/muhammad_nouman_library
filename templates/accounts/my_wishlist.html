@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "My Wishlist" %}{% endblock %}
+{% block content %}
+<div class="container py-5">
+  <h1 class="section-title">{% trans "My Wishlist" %}</h1>
+  <div class="row g-4">
+    {% for item in items %}
+      {% include "books/_book_card.html" with book=item.book %}
+    {% empty %}
+      <p class="text-muted">{% trans "Your wishlist is empty." %}</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

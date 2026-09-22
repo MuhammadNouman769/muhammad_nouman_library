@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Copyright" %}{% endblock %}
+{% block content %}
+<div class="container py-5">
+  <h1 class="section-title">{% trans "Copyright Notice" %}</h1>
+  <div class="dash-card" style="max-width:800px;">
+    <p>&copy; {% now "Y" %} {{ SITE_NAME }}. {% trans "All rights reserved." %}</p>
+    <p>{% trans "All book covers, descriptions and content are property of their respective authors and publishers, used here for library/demo purposes." %}</p>
+    <p>{% trans "If you believe content on this site infringes your copyright, please contact us and we will address it promptly." %}</p>
+  </div>
+</div>
+{% endblock %}

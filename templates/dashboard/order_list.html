@@ -1,0 +1,23 @@
+{% extends "dashboard/base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Orders" %}{% endblock %}
+{% block dash_content %}
+<h2 class="fw-bold mb-4">{% trans "Orders" %}</h2>
+<div class="dash-card">
+  <table class="table dash-table align-middle">
+    <thead><tr><th>#</th><th>{% trans "Customer" %}</th><th>{% trans "Date" %}</th><th>{% trans "Status" %}</th><th>{% trans "Total" %}</th><th></th></tr></thead>
+    <tbody>
+      {% for order in orders %}
+      <tr>
+        <td>{{ order.order_number }}</td>
+        <td>{{ order.full_name }}</td>
+        <td>{{ order.created_at|date:"d M Y" }}</td>
+        <td><span class="badge bg-primary">{{ order.get_status_display }}</span></td>
+        <td>{{ order.grand_total }}</td>
+        <td><a href="{% url 'dashboard:order_detail' order.pk %}" class="btn btn-sm btn-outline-primary">{% trans "View" %}</a></td>
+      </tr>
+      {% empty %}<tr><td colspan="6" class="text-center text-muted py-4">{% trans "No orders." %}</td></tr>{% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

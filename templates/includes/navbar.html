@@ -1,0 +1,75 @@
+{% load i18n %}
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top mnl-navbar">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="{% url 'core:home' %}">
+      <i class="bi bi-book-half"></i> {{ SITE_NAME }}
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="{% url 'core:home' %}">{% trans "Home" %}</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'books:list' %}">{% trans "All Books" %}</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'categories:list' %}">{% trans "Categories" %}</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'audio:list' %}">{% trans "Audio Books" %}</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'books:free' %}">{% trans "Free Books" %}</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'books:author_list' %}">{% trans "Authors" %}</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'pages:about' %}">{% trans "About" %}</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'pages:contact' %}">{% trans "Contact" %}</a></li>
+      </ul>
+
+      <!-- live search -->
+      <div class="position-relative me-3 mnl-search">
+        <input type="text" id="navSearchInput" class="form-control form-control-sm" placeholder="{% trans 'Search books, authors...' %}" autocomplete="off">
+        <div id="navSearchResults" class="mnl-search-results d-none"></div>
+      </div>
+
+      <!-- language switcher -->
+      <form action="{% url 'set_language' %}" method="post" class="d-flex align-items-center me-3">
+        {% csrf_token %}
+        <input name="next" type="hidden" value="{{ request.path }}">
+        <select name="language" class="form-select form-select-sm mnl-lang-select" onchange="this.form.submit()">
+          {% get_current_language as CURRENT_LANGUAGE %}
+          {% get_available_languages as LANGUAGES %}
+          {% for code, name in LANGUAGES %}
+            <option value="{{ code }}" {% if code == CURRENT_LANGUAGE %}selected{% endif %}>{{ name }}</option>
+          {% endfor %}
+        </select>
+      </form>
+
+      <ul class="navbar-nav align-items-lg-center">
+        <li class="nav-item">
+          <a class="nav-link position-relative" href="{% url 'orders:cart' %}">
+            <i class="bi bi-cart3 fs-5"></i>
+            <span id="cartCountBadge" class="badge rounded-pill bg-danger mnl-cart-badge">{{ cart_count }}</span>
+          </a>
+        </li>
+        {% if user.is_authenticated %}
+          {% if user.is_staff %}
+          <li class="nav-item"><a class="nav-link" href="{% url 'dashboard:overview' %}"><i class="bi bi-speedometer2"></i> {% trans "Dashboard" %}</a></li>
+          {% endif %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+              <i class="bi bi-person-circle"></i> {{ user.first_name|default:user.username }}
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="{% url 'accounts:profile' %}">{% trans "Profile" %}</a></li>
+              <li><a class="dropdown-item" href="{% url 'accounts:my_orders' %}">{% trans "My Orders" %}</a></li>
+              <li><a class="dropdown-item" href="{% url 'accounts:my_wishlist' %}">{% trans "Wishlist" %}</a></li>
+              <li><a class="dropdown-item" href="{% url 'accounts:my_downloads' %}">{% trans "Downloads" %}</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="{% url 'accounts:logout' %}">{% trans "Logout" %}</a></li>
+            </ul>
+          </li>
+        {% else %}
+          <li class="nav-item"><a class="nav-link" href="{% url 'accounts:login' %}">{% trans "Login" %}</a></li>
+          <li class="nav-item">
+            <a class="btn btn-sm mnl-btn-accent ms-lg-2" href="{% url 'accounts:signup' %}">{% trans "Sign Up" %}</a>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>

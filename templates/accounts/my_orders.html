@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "My Orders" %}{% endblock %}
+{% block content %}
+<div class="container py-5">
+  <h1 class="section-title">{% trans "My Orders" %}</h1>
+  <div class="dash-card">
+    <table class="table dash-table">
+      <thead><tr><th>{% trans "Order #" %}</th><th>{% trans "Date" %}</th><th>{% trans "Status" %}</th><th>{% trans "Total" %}</th><th></th></tr></thead>
+      <tbody>
+        {% for order in orders %}
+        <tr>
+          <td>{{ order.order_number }}</td>
+          <td>{{ order.created_at|date:"d M Y" }}</td>
+          <td><span class="badge bg-primary">{{ order.get_status_display }}</span></td>
+          <td>{{ order.grand_total }}</td>
+          <td><a href="{% url 'orders:detail' order.id %}" class="btn btn-sm btn-outline-primary">{% trans "View" %}</a></td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="5" class="text-center text-muted py-4">{% trans "No orders yet." %}</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

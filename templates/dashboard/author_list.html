@@ -1,0 +1,32 @@
+{% extends "dashboard/base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Authors" %}{% endblock %}
+{% block dash_content %}
+<h2 class="fw-bold mb-4">{% trans "Authors" %}</h2>
+<div class="row g-4">
+  <div class="col-lg-4">
+    <div class="dash-card">
+      <h6 class="fw-bold mb-3">{% trans "Add Author" %}</h6>
+      <form method="post" action="{% url 'dashboard:author_add' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-2">{{ form.name }}</div>
+        <div class="mb-2">{{ form.bio }}</div>
+        <div class="mb-2">{{ form.photo }}</div>
+        <button class="btn mnl-btn-accent w-100" type="submit">{% trans "Add" %}</button>
+      </form>
+    </div>
+  </div>
+  <div class="col-lg-8">
+    <div class="dash-card">
+      <table class="table dash-table">
+        <thead><tr><th>{% trans "Name" %}</th><th>{% trans "Books" %}</th></tr></thead>
+        <tbody>
+          {% for a in authors %}
+          <tr><td>{{ a.name }}</td><td>{{ a.n_books }}</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

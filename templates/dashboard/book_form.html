@@ -1,0 +1,48 @@
+{% extends "dashboard/base.html" %}
+{% load i18n %}
+{% block title %}{{ title }}{% endblock %}
+{% block dash_content %}
+<h2 class="fw-bold mb-4">{{ title }}</h2>
+<div class="dash-card">
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="row g-3">
+      <div class="col-md-8">
+        <label class="form-label small fw-semibold">{% trans "Title" %}</label>{{ form.title }}
+      </div>
+      <div class="col-md-4">
+        <label class="form-label small fw-semibold">{% trans "Language" %}</label>{{ form.language }}
+      </div>
+      <div class="col-md-6">
+        <label class="form-label small fw-semibold">{% trans "Author" %}</label>{{ form.author }}
+      </div>
+      <div class="col-md-6">
+        <label class="form-label small fw-semibold">{% trans "Category" %}</label>{{ form.category }}
+      </div>
+      <div class="col-12">
+        <label class="form-label small fw-semibold">{% trans "Short Description" %}</label>{{ form.short_description }}
+      </div>
+      <div class="col-12">
+        <label class="form-label small fw-semibold">{% trans "Description" %}</label>{{ form.description }}
+      </div>
+      <div class="col-md-3"><label class="form-label small fw-semibold">{% trans "Pages" %}</label>{{ form.pages }}</div>
+      <div class="col-md-3"><label class="form-label small fw-semibold">ISBN</label>{{ form.isbn }}</div>
+      <div class="col-md-3"><label class="form-label small fw-semibold">{% trans "Published Date" %}</label>{{ form.published_date }}</div>
+      <div class="col-md-3"><label class="form-label small fw-semibold">{% trans "Preview Pages" %}</label>{{ form.preview_pages }}</div>
+      <div class="col-md-3"><label class="form-label small fw-semibold">{% trans "Price" %}</label>{{ form.price }}</div>
+      <div class="col-md-3"><label class="form-label small fw-semibold">{% trans "Discount Price" %}</label>{{ form.discount_price }}</div>
+      <div class="col-md-3"><label class="form-label small fw-semibold">{% trans "Cover Image" %}</label>{{ form.cover }}</div>
+      <div class="col-md-3"><label class="form-label small fw-semibold">PDF</label>{{ form.pdf_file }}</div>
+      <div class="col-md-3"><label class="form-label small fw-semibold">{% trans "Audio File" %}</label>{{ form.audio_file }}</div>
+      <div class="col-md-9 d-flex align-items-end gap-4">
+        <div class="form-check">{{ form.is_featured }}<label class="form-check-label small">{% trans "Featured" %}</label></div>
+        <div class="form-check">{{ form.is_free }}<label class="form-check-label small">{% trans "Free" %}</label></div>
+        <div class="form-check">{{ form.is_published }}<label class="form-check-label small">{% trans "Published" %}</label></div>
+        <div class="form-check">{{ form.is_bestseller }}<label class="form-check-label small">{% trans "Bestseller" %}</label></div>
+      </div>
+    </div>
+    <button class="btn mnl-btn-accent mt-4" type="submit">{% trans "Save Book" %}</button>
+    <a href="{% url 'dashboard:book_list' %}" class="btn btn-outline-secondary mt-4">{% trans "Cancel" %}</a>
+  </form>
+</div>
+{% endblock %}

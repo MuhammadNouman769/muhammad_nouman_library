@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Shipping Policy" %}{% endblock %}
+{% block content %}
+<div class="container py-5">
+  <h1 class="section-title">{% trans "Shipping Policy" %}</h1>
+  <div class="dash-card" style="max-width:800px;">
+    <p>{% trans "All books on Muhammad Nouman Library are digital products (PDF / online reading / audio)." %}</p>
+    <p>{% trans "There is no physical shipping — your purchase is available for download and streaming immediately after checkout, from your \"My Downloads\" page." %}</p>
+  </div>
+</div>
+{% endblock %}

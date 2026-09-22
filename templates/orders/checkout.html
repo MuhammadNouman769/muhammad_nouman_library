@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Checkout" %}{% endblock %}
+{% block content %}
+<div class="container py-5">
+  <h1 class="section-title">{% trans "Checkout" %}</h1>
+  <div class="row g-4">
+    <div class="col-lg-7">
+      <div class="dash-card">
+        <h5 class="fw-bold mb-3">{% trans "Customer Information" %}</h5>
+        <form method="post">
+          {% csrf_token %}
+          <div class="mb-3">{{ form.full_name }}</div>
+          <div class="mb-3">{{ form.email }}</div>
+          <div class="mb-3">{{ form.phone }}</div>
+          <div class="mb-3">{{ form.address }}</div>
+          <div class="mb-3">{{ form.city }}</div>
+          <button class="btn mnl-btn-accent w-100" type="submit">{% trans "Place Order" %}</button>
+        </form>
+      </div>
+    </div>
+    <div class="col-lg-5">
+      <div class="dash-card">
+        <h5 class="fw-bold mb-3">{% trans "Order Summary" %}</h5>
+        {% for item in cart %}
+        <div class="d-flex justify-content-between small mb-2"><span>{{ item.book.title|truncatechars:28 }} x{{ item.quantity }}</span><span>{{ item.total_price }}</span></div>
+        {% endfor %}
+        <hr>
+        <div class="d-flex justify-content-between"><span>{% trans "Subtotal" %}</span><span>{{ cart.get_total_price }}</span></div>
+        {% if coupon %}<div class="d-flex justify-content-between text-success"><span>{% trans "Discount" %} ({{ discount_percent }}%)</span><span>-</span></div>{% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

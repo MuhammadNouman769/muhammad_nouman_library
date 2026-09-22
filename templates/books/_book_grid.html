@@ -1,0 +1,24 @@
+{% load i18n %}
+{% if books %}
+  <div class="row g-4">
+    {% for book in books %}
+      {% include "books/_book_card.html" with book=book %}
+    {% endfor %}
+  </div>
+  {% if page_obj.paginator.num_pages > 1 %}
+  <nav class="mt-4">
+    <ul class="pagination justify-content-center">
+      {% for num in page_obj.paginator.page_range %}
+        <li class="page-item {% if num == page_obj.number %}active{% endif %}">
+          <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </nav>
+  {% endif %}
+{% else %}
+  <div class="text-center py-5">
+    <i class="bi bi-emoji-frown" style="font-size:3rem;color:#ccc;"></i>
+    <p class="text-muted mt-2">{% trans "No books found. Try a different search or filter." %}</p>
+  </div>
+{% endif %}

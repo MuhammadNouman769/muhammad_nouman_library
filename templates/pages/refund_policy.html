@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Refund Policy" %}{% endblock %}
+{% block content %}
+<div class="container py-5">
+  <h1 class="section-title">{% trans "Refund Policy" %}</h1>
+  <div class="dash-card" style="max-width:800px;">
+    <p>{% trans "Because digital books are delivered instantly, refunds are only issued in the following cases:" %}</p>
+    <ul>
+      <li>{% trans "The purchased file is corrupted or inaccessible." %}</li>
+      <li>{% trans "You were charged twice for the same order." %}</li>
+      <li>{% trans "The book was not as described." %}</li>
+    </ul>
+    <p>{% trans "Refund requests must be made within 7 days of purchase via the Contact page." %}</p>
+  </div>
+</div>
+{% endblock %}

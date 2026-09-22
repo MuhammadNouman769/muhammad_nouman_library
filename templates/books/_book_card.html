@@ -1,0 +1,39 @@
+{% load i18n %}
+<div class="col-6 col-md-4 col-lg-3">
+  <div class="book-card">
+    <a href="{{ book.get_absolute_url }}" class="cover-wrap d-block">
+      {% if book.cover %}
+        <img src="{{ book.cover.url }}" alt="{{ book.title }}" loading="lazy">
+      {% else %}
+        <img src="https://placehold.co/300x400/1c2b4a/fff?text={{ book.title|urlencode }}" alt="{{ book.title }}" loading="lazy">
+      {% endif %}
+      <div class="badges">
+        {% if book.is_free %}<span class="badge bg-success">{% trans "Free" %}</span>{% endif %}
+        {% if book.has_discount %}<span class="badge bg-danger">-{{ book.discount_percent }}%</span>{% endif %}
+        {% if book.has_audio %}<span class="badge bg-dark"><i class="bi bi-headphones"></i></span>{% endif %}
+      </div>
+    </a>
+    <div class="body">
+      <div class="title"><a href="{{ book.get_absolute_url }}" class="text-decoration-none text-dark">{{ book.title }}</a></div>
+      <div class="author">{{ book.author.name }}</div>
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="price">
+          {% if book.is_free %}{% trans "Free" %}
+          {% else %}{{ CURRENCY }} {{ book.final_price }}
+            {% if book.has_discount %}<span class="old">{{ book.price }}</span>{% endif %}
+          {% endif %}
+        </div>
+        <div class="rating"><i class="bi bi-star-fill"></i> {{ book.average_rating|default:"—" }}</div>
+      </div>
+      <div class="d-flex gap-2 mt-2 icon-actions">
+        <button class="btn btn-sm btn-outline-primary flex-fill js-add-to-cart" data-book-id="{{ book.id }}">
+          <i class="bi bi-cart-plus"></i> {% trans "Add" %}
+        </button>
+        <a href="{{ book.get_absolute_url }}" class="btn btn-sm btn-primary"><i class="bi bi-eye"></i></a>
+        {% if book.has_audio %}
+        <button class="btn btn-sm btn-dark js-listen-audio" data-audio-url="{{ book.audio_file.url }}" data-title="{{ book.title }}"><i class="bi bi-headphones"></i></button>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>

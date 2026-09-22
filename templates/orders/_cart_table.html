@@ -1,0 +1,22 @@
+{% load i18n %}
+{% if cart|length > 0 %}
+<table class="table align-middle">
+  <thead><tr><th>{% trans "Book" %}</th><th>{% trans "Price" %}</th><th>{% trans "Qty" %}</th><th>{% trans "Total" %}</th><th></th></tr></thead>
+  <tbody>
+    {% for item in cart %}
+    <tr>
+      <td class="d-flex align-items-center gap-2">
+        {% if item.book.cover %}<img src="{{ item.book.cover.url }}" style="width:40px;height:56px;object-fit:cover;border-radius:4px;">{% endif %}
+        <a href="{{ item.book.get_absolute_url }}" class="text-decoration-none text-dark small fw-semibold">{{ item.book.title }}</a>
+      </td>
+      <td>{{ item.price }}</td>
+      <td><input type="number" min="1" value="{{ item.quantity }}" class="form-control form-control-sm js-cart-qty" style="width:70px;" data-book-id="{{ item.book.id }}"></td>
+      <td>{{ item.total_price }}</td>
+      <td><button class="btn btn-sm btn-outline-danger js-cart-remove" data-book-id="{{ item.book.id }}"><i class="bi bi-trash"></i></button></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p class="text-muted text-center py-4">{% trans "Your cart is empty." %} <a href="{% url 'books:list' %}">{% trans "Browse books" %}</a></p>
+{% endif %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Login" %}{% endblock %}
+{% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-5">
+      <div class="dash-card">
+        <h2 class="fw-bold mb-4 text-center">{% trans "Login" %}</h2>
+        <form method="post">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label class="form-label">{% trans "Username" %}</label>
+            <input type="text" name="username" class="form-control" required autofocus>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">{% trans "Password" %}</label>
+            <input type="password" name="password" class="form-control" required>
+          </div>
+          {% if form.errors %}<div class="alert alert-danger py-2 small">{% trans "Invalid username or password." %}</div>{% endif %}
+          <button class="btn mnl-btn-accent w-100" type="submit">{% trans "Login" %}</button>
+        </form>
+        <p class="text-center small text-muted mt-3">{% trans "Don't have an account?" %} <a href="{% url 'accounts:signup' %}">{% trans "Sign up" %}</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

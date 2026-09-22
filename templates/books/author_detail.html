@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{{ author.name }}{% endblock %}
+{% block content %}
+<div class="container py-5">
+  <div class="d-flex align-items-center gap-3 mb-4">
+    {% if author.photo %}<img src="{{ author.photo.url }}" style="width:70px;height:70px;border-radius:50%;object-fit:cover;">
+    {% else %}<div class="category-chip" style="width:70px;height:70px;"><i class="bi bi-person fs-3"></i></div>{% endif %}
+    <div>
+      <h1 class="fw-bold mb-0">{{ author.name }}</h1>
+      <p class="text-muted mb-0">{{ author.book_count }} {% trans "books" %}</p>
+    </div>
+  </div>
+  {% if author.bio %}<p class="mb-4">{{ author.bio }}</p>{% endif %}
+  <div class="row g-4">
+    {% for book in books %}
+      {% include "books/_book_card.html" with book=book %}
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

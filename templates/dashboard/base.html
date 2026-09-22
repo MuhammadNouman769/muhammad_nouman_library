@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+<div class="dash-wrap">
+  <aside class="dash-sidebar py-3">
+    <div class="px-3 mb-3">
+      <span class="fw-bold text-white"><i class="bi bi-speedometer2"></i> {% trans "Dashboard" %}</span>
+    </div>
+    <a href="{% url 'dashboard:overview' %}" class="{% if request.resolver_match.url_name == 'overview' %}active{% endif %}"><i class="bi bi-grid"></i> {% trans "Overview" %}</a>
+    <a href="{% url 'dashboard:book_list' %}" class="{% if 'book' in request.resolver_match.url_name %}active{% endif %}"><i class="bi bi-book"></i> {% trans "Books" %}</a>
+    <a href="{% url 'dashboard:category_list' %}" class="{% if 'category' in request.resolver_match.url_name %}active{% endif %}"><i class="bi bi-tags"></i> {% trans "Categories" %}</a>
+    <a href="{% url 'dashboard:author_list' %}" class="{% if 'author' in request.resolver_match.url_name %}active{% endif %}"><i class="bi bi-person"></i> {% trans "Authors" %}</a>
+    <a href="{% url 'dashboard:order_list' %}" class="{% if 'order' in request.resolver_match.url_name %}active{% endif %}"><i class="bi bi-bag-check"></i> {% trans "Orders" %}</a>
+    <a href="{% url 'dashboard:customer_list' %}" class="{% if 'customer' in request.resolver_match.url_name %}active{% endif %}"><i class="bi bi-people"></i> {% trans "Customers" %}</a>
+    <a href="{% url 'dashboard:audiobook_list' %}" class="{% if 'audiobook' in request.resolver_match.url_name %}active{% endif %}"><i class="bi bi-headphones"></i> {% trans "Audio Books" %}</a>
+    <a href="{% url 'dashboard:download_list' %}" class="{% if 'download' in request.resolver_match.url_name %}active{% endif %}"><i class="bi bi-download"></i> {% trans "Downloads" %}</a>
+    <a href="{% url 'dashboard:review_list' %}" class="{% if 'review' in request.resolver_match.url_name %}active{% endif %}"><i class="bi bi-star"></i> {% trans "Reviews" %}</a>
+    <a href="{% url 'dashboard:coupon_list' %}" class="{% if 'coupon' in request.resolver_match.url_name %}active{% endif %}"><i class="bi bi-ticket-perforated"></i> {% trans "Coupons" %}</a>
+    <a href="{% url 'dashboard:reports' %}" class="{% if request.resolver_match.url_name == 'reports' %}active{% endif %}"><i class="bi bi-bar-chart"></i> {% trans "Reports" %}</a>
+    <a href="{% url 'dashboard:settings' %}" class="{% if request.resolver_match.url_name == 'settings' %}active{% endif %}"><i class="bi bi-gear"></i> {% trans "Website Settings" %}</a>
+    <a href="{% url 'dashboard:profile' %}" class="{% if request.resolver_match.url_name == 'profile' %}active{% endif %}"><i class="bi bi-person-circle"></i> {% trans "Profile" %}</a>
+    <hr class="mx-3" style="border-color:rgba(255,255,255,.1);">
+    <a href="{% url 'core:home' %}"><i class="bi bi-box-arrow-left"></i> {% trans "Back to Site" %}</a>
+  </aside>
+  <div class="dash-content">
+    {% block dash_content %}{% endblock %}
+  </div>
+</div>
+{% endblock %}

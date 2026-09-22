@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "About" %}{% endblock %}
+{% block content %}
+<div class="container py-5">
+  <h1 class="section-title">{% trans "About Muhammad Nouman" %}</h1>
+  <div class="dash-card" style="max-width:800px;">
+    <p>{% blocktrans %}Muhammad Nouman Library is an online library built to make reading, downloading and listening to books effortless — for readers everywhere, in English, Urdu and Arabic.{% endblocktrans %}</p>
+    <p>{% blocktrans %}Our mission is to bring together thousands of titles across every genre, with a clean, fast, distraction-free reading experience — whether you want to read online, download a PDF, or listen to the audiobook version on the go.{% endblocktrans %}</p>
+    <p>{% blocktrans %}Built and maintained by Muhammad Nouman, a Python/Django backend engineer passionate about clean architecture and great reading experiences.{% endblocktrans %}</p>
+  </div>
+</div>
+{% endblock %}

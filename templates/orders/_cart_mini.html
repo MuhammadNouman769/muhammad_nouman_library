@@ -1,0 +1,5 @@
+{% load i18n %}
+{% for item in cart %}
+<div class="d-flex justify-content-between small mb-1"><span>{{ item.book.title|truncatechars:25 }} x{{ item.quantity }}</span><span>{{ item.total_price }}</span></div>
+{% empty %}<p class="text-muted small mb-0">{% trans "Cart is empty" %}</p>
+{% endfor %}

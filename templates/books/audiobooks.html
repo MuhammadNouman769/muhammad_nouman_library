@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Audio Books" %}{% endblock %}
+{% block content %}
+<div class="container py-5">
+  <h1 class="section-title"><i class="bi bi-headphones"></i> {% trans "Audio Books" %}</h1>
+  <p class="section-sub">{% trans "Listen to books anytime — tap Listen Audio on any title below." %}</p>
+  <div id="bookGrid">
+    {% include "books/_book_grid.html" %}
+  </div>
+</div>
+
+<div id="audioPlayerBox" class="audio-player-box position-fixed bottom-0 start-0 end-0 d-none" style="border-radius:0; z-index:1040;">
+  <div class="container d-flex justify-content-between align-items-center">
+    <span class="fw-semibold player-title"></span>
+    <audio controls style="max-width:400px;"></audio>
+  </div>
+</div>
+{% endblock %}

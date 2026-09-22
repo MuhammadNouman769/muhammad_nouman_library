@@ -1,0 +1,22 @@
+{% extends "dashboard/base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Reports" %}{% endblock %}
+{% block dash_content %}
+<h2 class="fw-bold mb-4">{% trans "Reports" %}</h2>
+<div class="row g-4">
+  <div class="col-lg-6">
+    <div class="dash-card">
+      <h6 class="fw-bold mb-3">{% trans "Top Viewed Books" %}</h6>
+      {% for book in top_books %}<div class="d-flex justify-content-between small mb-2"><span>{{ book.title|truncatechars:32 }}</span><span class="text-muted">{{ book.views_count }}</span></div>{% empty %}<p class="text-muted small">{% trans "No data." %}</p>{% endfor %}
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="dash-card">
+      <h6 class="fw-bold mb-3">{% trans "Orders by Status" %}</h6>
+      {% for row in orders_by_status %}<div class="d-flex justify-content-between small mb-2"><span>{{ row.status|capfirst }}</span><span class="text-muted">{{ row.n }}</span></div>{% empty %}<p class="text-muted small">{% trans "No data." %}</p>{% endfor %}
+      <hr>
+      <div class="fw-bold">{% trans "Total Revenue" %}: {{ CURRENCY }} {{ revenue_total }}</div>
+    </div>
+  </div>
+</div>
+{% endblock %}

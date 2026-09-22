@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Contact" %}{% endblock %}
+{% block content %}
+<div class="container py-5">
+  <h1 class="section-title">{% trans "Contact Us" %}</h1>
+  <div class="row g-4">
+    <div class="col-lg-7">
+      <div class="dash-card">
+        <form id="contactForm">
+          <div class="mb-3">{{ form.name }}</div>
+          <div class="mb-3">{{ form.email }}</div>
+          <div class="mb-3">{{ form.subject }}</div>
+          <div class="mb-3">{{ form.message }}</div>
+          <button class="btn mnl-btn-accent" type="submit">{% trans "Send Message" %}</button>
+          <div id="contactMsg"></div>
+        </form>
+      </div>
+    </div>
+    <div class="col-lg-5">
+      <div class="dash-card">
+        <h6 class="fw-bold">{% trans "Get in touch" %}</h6>
+        <p class="text-muted small"><i class="bi bi-envelope"></i> support@muhammadnoumanlibrary.com</p>
+        <p class="text-muted small"><i class="bi bi-clock"></i> {% trans "We reply within 24 hours." %}</p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

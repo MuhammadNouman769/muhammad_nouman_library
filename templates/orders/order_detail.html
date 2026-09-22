@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Order" %} {{ order.order_number }}{% endblock %}
+{% block content %}
+<div class="container py-5">
+  <h1 class="section-title">{% trans "Order" %} {{ order.order_number }}</h1>
+  <p class="text-muted">{% trans "Status" %}: <span class="badge bg-primary">{{ order.get_status_display }}</span></p>
+  <div class="dash-card">
+    <table class="table">
+      <thead><tr><th>{% trans "Book" %}</th><th>{% trans "Price" %}</th><th>{% trans "Qty" %}</th><th>{% trans "Total" %}</th></tr></thead>
+      <tbody>
+        {% for item in order.items.all %}
+        <tr><td>{{ item.title }}</td><td>{{ item.price }}</td><td>{{ item.quantity }}</td><td>{{ item.total_price }}</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <div class="text-end">
+      <p class="mb-1">{% trans "Subtotal" %}: {{ order.subtotal }}</p>
+      <p class="mb-1">{% trans "Discount" %}: {{ order.discount_total }}</p>
+      <h5 class="fw-bold">{% trans "Total" %}: {{ order.grand_total }}</h5>
+    </div>
+  </div>
+</div>
+{% endblock %}

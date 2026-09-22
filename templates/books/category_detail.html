@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{{ category.name }}{% endblock %}
+{% block content %}
+<div class="container py-5">
+  <h1 class="section-title">{{ category.name }}</h1>
+  <p class="section-sub">{{ category.description|default:"" }} — <span id="resultCount">{{ page_obj.paginator.count }}</span> {% trans "books" %}</p>
+  <div id="bookGrid">
+    {% include "books/_book_grid.html" %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Terms of Use" %}{% endblock %}
+{% block content %}
+<div class="container py-5">
+  <h1 class="section-title">{% trans "Terms of Use" %}</h1>
+  <div class="dash-card" style="max-width:800px;">
+    <p class="text-muted small">{% trans "Last updated" %}: {% now "F Y" %}</p>
+    <h5>1. {% trans "Acceptance of Terms" %}</h5>
+    <p>{% trans "By using this website you agree to these Terms of Use." %}</p>
+    <h5>2. {% trans "Use of Content" %}</h5>
+    <p>{% trans "Purchased or free books are for personal reading use only. Redistribution or resale is prohibited." %}</p>
+    <h5>3. {% trans "Accounts" %}</h5>
+    <p>{% trans "You are responsible for keeping your account credentials secure." %}</p>
+    <h5>4. {% trans "Changes to Terms" %}</h5>
+    <p>{% trans "We may update these terms from time to time; continued use constitutes acceptance." %}</p>
+  </div>
+</div>
+{% endblock %}

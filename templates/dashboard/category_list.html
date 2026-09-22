@@ -1,0 +1,43 @@
+{% extends "dashboard/base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Categories" %}{% endblock %}
+{% block dash_content %}
+<h2 class="fw-bold mb-4">{% trans "Categories" %}</h2>
+<div class="row g-4">
+  <div class="col-lg-4">
+    <div class="dash-card">
+      <h6 class="fw-bold mb-3">{% trans "Add Category" %}</h6>
+      <form method="post" action="{% url 'dashboard:category_add' %}">
+        {% csrf_token %}
+        <div class="mb-2">{{ form.name }}</div>
+        <div class="mb-2">{{ form.description }}</div>
+        <div class="mb-2">{{ form.icon }}</div>
+        <div class="form-check mb-2">{{ form.is_active }} <label class="form-check-label small">{% trans "Active" %}</label></div>
+        <button class="btn mnl-btn-accent w-100" type="submit">{% trans "Add" %}</button>
+      </form>
+    </div>
+  </div>
+  <div class="col-lg-8">
+    <div class="dash-card">
+      <table class="table dash-table">
+        <thead><tr><th>{% trans "Name" %}</th><th>{% trans "Books" %}</th><th>{% trans "Status" %}</th><th></th></tr></thead>
+        <tbody>
+          {% for cat in categories %}
+          <tr>
+            <td><i class="bi {{ cat.icon|default:'bi-book' }}"></i> {{ cat.name }}</td>
+            <td>{{ cat.n_books }}</td>
+            <td>{% if cat.is_active %}<span class="badge bg-success">{% trans "Active" %}</span>{% else %}<span class="badge bg-secondary">{% trans "Inactive" %}</span>{% endif %}</td>
+            <td>
+              <form method="post" action="{% url 'dashboard:category_delete' cat.pk %}" class="d-inline">
+                {% csrf_token %}
+                <button class="btn btn-sm btn-outline-danger js-confirm-delete" data-confirm="{% trans 'Delete category?' %}"><i class="bi bi-trash"></i></button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

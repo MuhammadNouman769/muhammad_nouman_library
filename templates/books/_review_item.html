@@ -1,0 +1,8 @@
+{% load i18n %}
+<div class="border-bottom pb-3 mb-3">
+  <div class="d-flex justify-content-between">
+    <span class="fw-semibold">{{ review.user.first_name|default:review.user.username }}</span>
+    <span class="text-warning small">{% for i in "12345" %}{% if forloop.counter <= review.rating %}<i class="bi bi-star-fill"></i>{% else %}<i class="bi bi-star"></i>{% endif %}{% endfor %}</span>
+  </div>
+  <p class="mb-0 small text-muted">{{ review.comment }}</p>
+</div>

@@ -1,0 +1,16 @@
+{% extends "dashboard/base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Customers" %}{% endblock %}
+{% block dash_content %}
+<h2 class="fw-bold mb-4">{% trans "Customers" %}</h2>
+<div class="dash-card">
+  <table class="table dash-table">
+    <thead><tr><th>{% trans "Name" %}</th><th>{% trans "Email" %}</th><th>{% trans "Orders" %}</th><th>{% trans "Joined" %}</th></tr></thead>
+    <tbody>
+      {% for c in customers %}
+      <tr><td>{{ c.get_full_name|default:c.username }}</td><td>{{ c.email }}</td><td>{{ c.n_orders }}</td><td>{{ c.date_joined|date:"d M Y" }}</td></tr>
+      {% empty %}<tr><td colspan="4" class="text-center text-muted py-4">{% trans "No customers yet." %}</td></tr>{% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

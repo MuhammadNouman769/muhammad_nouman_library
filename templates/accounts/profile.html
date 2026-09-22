@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Profile" %}{% endblock %}
+{% block content %}
+<div class="container py-5">
+  <h1 class="section-title">{% trans "My Profile" %}</h1>
+  <div class="dash-card" style="max-width:600px;">
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="mb-3"><label class="form-label">{% trans "First name" %}</label>{{ u_form.first_name }}</div>
+      <div class="mb-3"><label class="form-label">{% trans "Last name" %}</label>{{ u_form.last_name }}</div>
+      <div class="mb-3"><label class="form-label">{% trans "Email" %}</label>{{ u_form.email }}</div>
+      <div class="mb-3"><label class="form-label">{% trans "Phone" %}</label>{{ p_form.phone }}</div>
+      <div class="mb-3"><label class="form-label">{% trans "Address" %}</label>{{ p_form.address }}</div>
+      <div class="mb-3"><label class="form-label">{% trans "City" %}</label>{{ p_form.city }}</div>
+      <div class="mb-3"><label class="form-label">{% trans "Avatar" %}</label>{{ p_form.avatar }}</div>
+      <button class="btn mnl-btn-accent" type="submit">{% trans "Save Changes" %}</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

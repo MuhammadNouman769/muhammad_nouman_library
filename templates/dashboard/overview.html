@@ -1,0 +1,35 @@
+{% extends "dashboard/base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Dashboard Overview" %}{% endblock %}
+{% block dash_content %}
+<h2 class="fw-bold mb-4">{% trans "Overview" %}</h2>
+<div class="row g-3 mb-4">
+  <div class="col-md-3"><div class="dash-card dash-stat"><div class="num">{{ total_books }}</div><div class="label">{% trans "Total Books" %}</div></div></div>
+  <div class="col-md-3"><div class="dash-card dash-stat"><div class="num">{{ total_orders }}</div><div class="label">{% trans "Total Orders" %}</div></div></div>
+  <div class="col-md-3"><div class="dash-card dash-stat"><div class="num">{{ total_customers }}</div><div class="label">{% trans "Total Customers" %}</div></div></div>
+  <div class="col-md-3"><div class="dash-card dash-stat"><div class="num">{{ CURRENCY }} {{ total_revenue }}</div><div class="label">{% trans "Total Revenue" %}</div></div></div>
+</div>
+<div class="row g-3">
+  <div class="col-lg-7">
+    <div class="dash-card">
+      <h6 class="fw-bold mb-3">{% trans "Recent Orders" %}</h6>
+      <table class="table dash-table">
+        <thead><tr><th>#</th><th>{% trans "Customer" %}</th><th>{% trans "Status" %}</th><th>{% trans "Total" %}</th></tr></thead>
+        <tbody>
+          {% for order in recent_orders %}
+          <tr><td><a href="{% url 'dashboard:order_detail' order.pk %}">{{ order.order_number }}</a></td><td>{{ order.full_name }}</td><td><span class="badge bg-primary">{{ order.get_status_display }}</span></td><td>{{ order.grand_total }}</td></tr>
+          {% empty %}<tr><td colspan="4" class="text-center text-muted py-3">{% trans "No orders yet." %}</td></tr>{% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="col-lg-5">
+    <div class="dash-card">
+      <h6 class="fw-bold mb-3">{% trans "Popular Books" %}</h6>
+      {% for book in popular_books %}
+      <div class="d-flex justify-content-between small mb-2"><span>{{ book.title|truncatechars:30 }}</span><span class="text-muted">{{ book.views_count }} {% trans "views" %}</span></div>
+      {% empty %}<p class="text-muted small">{% trans "No data yet." %}</p>{% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

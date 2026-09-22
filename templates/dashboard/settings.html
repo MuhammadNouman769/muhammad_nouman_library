@@ -1,0 +1,11 @@
+{% extends "dashboard/base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Website Settings" %}{% endblock %}
+{% block dash_content %}
+<h2 class="fw-bold mb-4">{% trans "Website Settings" %}</h2>
+<div class="dash-card" style="max-width:600px;">
+  <p class="text-muted small">{% trans "Site name, currency and other global values are configured in the project's .env file for now (SITE_NAME, CURRENCY). A full settings form can be added here later." %}</p>
+  <p class="mb-1"><strong>{% trans "Site Name" %}:</strong> {{ SITE_NAME }}</p>
+  <p class="mb-0"><strong>{% trans "Currency" %}:</strong> {{ CURRENCY }}</p>
+</div>
+{% endblock %}

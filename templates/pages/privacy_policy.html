@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Privacy Policy" %}{% endblock %}
+{% block content %}
+<div class="container py-5">
+  <h1 class="section-title">{% trans "Privacy Policy" %}</h1>
+  <div class="dash-card" style="max-width:800px;">
+    <p class="text-muted small">{% trans "Last updated" %}: {% now "F Y" %}</p>
+    <h5>1. {% trans "Information We Collect" %}</h5>
+    <p>{% trans "We collect basic account information (name, email) and order details necessary to deliver purchased books." %}</p>
+    <h5>2. {% trans "How We Use Your Information" %}</h5>
+    <p>{% trans "Your information is used solely to process orders, provide downloads, and improve your experience on the site." %}</p>
+    <h5>3. {% trans "Data Security" %}</h5>
+    <p>{% trans "We take reasonable measures to protect your personal data from unauthorized access." %}</p>
+    <h5>4. {% trans "Third Parties" %}</h5>
+    <p>{% trans "We do not sell your personal information to third parties." %}</p>
+    <h5>5. {% trans "Contact" %}</h5>
+    <p>{% trans "For privacy questions, reach us via the Contact page." %}</p>
+  </div>
+</div>
+{% endblock %}

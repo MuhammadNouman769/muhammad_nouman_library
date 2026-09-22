@@ -1,0 +1,50 @@
+{% load i18n %}
+<footer class="mnl-footer">
+  <div class="container py-5">
+    <div class="row g-4">
+      <div class="col-lg-4 col-md-6">
+        <h5 class="fw-bold mb-3"><i class="bi bi-book-half"></i> {{ SITE_NAME }}</h5>
+        <p class="text-light-50">{% trans "Your industry-grade online library — read, download and listen to books anytime, anywhere." %}</p>
+      </div>
+      <div class="col-lg-2 col-md-6">
+        <h6 class="fw-semibold mb-3">{% trans "Explore" %}</h6>
+        <ul class="list-unstyled footer-links">
+          <li><a href="{% url 'books:list' %}">{% trans "All Books" %}</a></li>
+          <li><a href="{% url 'books:featured' %}">{% trans "Featured Books" %}</a></li>
+          <li><a href="{% url 'books:latest' %}">{% trans "Latest Books" %}</a></li>
+          <li><a href="{% url 'books:popular' %}">{% trans "Popular Books" %}</a></li>
+          <li><a href="{% url 'books:free' %}">{% trans "Free Books" %}</a></li>
+          <li><a href="{% url 'audio:list' %}">{% trans "Audio Books" %}</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <h6 class="fw-semibold mb-3">{% trans "Company" %}</h6>
+        <ul class="list-unstyled footer-links">
+          <li><a href="{% url 'pages:about' %}">{% trans "About Muhammad Nouman" %}</a></li>
+          <li><a href="{% url 'pages:contact' %}">{% trans "Contact" %}</a></li>
+          <li><a href="{% url 'pages:faq' %}">{% trans "FAQ" %}</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <h6 class="fw-semibold mb-3">{% trans "Legal" %}</h6>
+        <ul class="list-unstyled footer-links">
+          <li><a href="{% url 'pages:privacy_policy' %}">{% trans "Privacy Policy" %}</a></li>
+          <li><a href="{% url 'pages:terms_of_use' %}">{% trans "Terms of Use" %}</a></li>
+          <li><a href="{% url 'pages:refund_policy' %}">{% trans "Refund Policy" %}</a></li>
+          <li><a href="{% url 'pages:shipping_policy' %}">{% trans "Shipping Policy" %}</a></li>
+          <li><a href="{% url 'pages:copyright' %}">{% trans "Copyright" %}</a></li>
+        </ul>
+      </div>
+    </div>
+    <hr class="border-light-50 mt-4">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center small">
+      <p class="mb-0">&copy; {% now "Y" %} {{ SITE_NAME }}. {% trans "All rights reserved." %}</p>
+      <div class="d-flex gap-3 mt-2 mt-md-0">
+        <a href="#" class="text-light"><i class="bi bi-facebook"></i></a>
+        <a href="#" class="text-light"><i class="bi bi-twitter-x"></i></a>
+        <a href="#" class="text-light"><i class="bi bi-instagram"></i></a>
+        <a href="#" class="text-light"><i class="bi bi-linkedin"></i></a>
+      </div>
+    </div>
+  </div>
+</footer>
